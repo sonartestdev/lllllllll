@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#111827" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <title>Pro Angular Chapter Launcher</title>
+  <style>
+    :root { color-scheme: dark; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #0b1020; color: #f8fafc; }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; background: radial-gradient(circle at top left, #1e3a8a, transparent 35%), #0b1020; }
+    .shell { max-width: 1040px; margin: 0 auto; padding: 24px 16px 48px; }
+    .hero { padding: 20px 0 18px; }
+    h1 { font-size: clamp(32px, 8vw, 56px); line-height: 0.95; margin: 0 0 12px; letter-spacing: -0.055em; }
+    .sub { color: #cbd5e1; font-size: 17px; line-height: 1.45; max-width: 680px; margin: 0; }
+    .toolbar { position: sticky; top: 0; z-index: 5; padding: 12px 0; backdrop-filter: blur(18px); background: rgba(11,16,32,0.78); }
+    input { width: 100%; border: 1px solid rgba(255,255,255,.16); border-radius: 18px; padding: 15px 16px; font-size: 17px; background: rgba(255,255,255,.08); color: #fff; outline: none; }
+    input::placeholder { color: #94a3b8; }
+    .grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); margin-top: 18px; }
+    .tile { min-height: 154px; display: flex; flex-direction: column; justify-content: space-between; padding: 16px; border-radius: 26px; background: linear-gradient(145deg, rgba(255,255,255,.14), rgba(255,255,255,.06)); border: 1px solid rgba(255,255,255,.15); color: inherit; text-decoration: none; box-shadow: 0 14px 35px rgba(0,0,0,.22); touch-action: manipulation; }
+    .tile:active { transform: scale(.985); }
+    .num { font-size: 36px; font-weight: 800; letter-spacing: -0.06em; }
+    .title { font-size: 15px; color: #e2e8f0; line-height: 1.25; margin-top: 8px; }
+    .launch { display: inline-flex; align-items: center; gap: 6px; color: #bfdbfe; font-weight: 700; font-size: 14px; }
+    .footer { margin-top: 26px; color: #94a3b8; font-size: 13px; line-height: 1.4; }
+    .pill { display: inline-block; margin-top: 14px; padding: 9px 12px; border-radius: 999px; background: rgba(255,255,255,.1); color: #dbeafe; font-size: 13px; }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="hero">
+      <h1>Pro Angular<br/>Chapter Launcher</h1>
+      <p class="sub">Tap a tile from iPhone Safari. Each chapter opens in StackBlitz using the official Apress source repo, so there is no laptop or local npm install required.</p>
+      <span class="pill">iPhone friendly • Add to Home Screen</span>
+    </section>
+    <div class="toolbar">
+      <input id="search" placeholder="Search chapters…" autocomplete="off" />
+    </div>
+    <section id="grid" class="grid" aria-label="Chapter tiles"></section>
+    <p class="footer">Tip: in Safari, tap Share → Add to Home Screen. If a StackBlitz chapter asks to install dependencies, tap its install/run button inside StackBlitz.</p>
+  </main>
+  <script>
+    const chapters = Array.from({ length: 29 }, (_, i) => {
+      const n = String(i + 1).padStart(2, '0');
+      return {
+        n,
+        title: `Chapter ${n}`,
+        url: `https://stackblitz.com/github/Apress/pro-angular-5ed/tree/main/${n}`
+      };
+    });
+
+    const grid = document.getElementById('grid');
+    const search = document.getElementById('search');
+
+    function render(filter = '') {
+      const q = filter.trim().toLowerCase();
+      grid.innerHTML = '';
+      chapters
+        .filter(c => !q || c.title.toLowerCase().includes(q) || c.n.includes(q))
+        .forEach(c => {
+          const a = document.createElement('a');
+          a.className = 'tile';
+          a.href = c.url;
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+          a.innerHTML = `<div><div class="num">${c.n}</div><div class="title">${c.title}</div></div><div class="launch">Launch ↗</div>`;
+          grid.appendChild(a);
+        });
+    }
+
+    search.addEventListener('input', e => render(e.target.value));
+    render();
+
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js').catch(() => {});
+    }
+  </script>
+</body>
+</html>
