@@ -7,74 +7,69 @@
   <link rel="manifest" href="manifest.webmanifest" />
   <title>Pro Angular Chapter Launcher</title>
   <style>
-    :root { color-scheme: dark; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #0b1020; color: #f8fafc; }
-    * { box-sizing: border-box; }
-    body { margin: 0; min-height: 100vh; background: radial-gradient(circle at top left, #1e3a8a, transparent 35%), #0b1020; }
-    .shell { max-width: 1040px; margin: 0 auto; padding: 24px 16px 48px; }
-    .hero { padding: 20px 0 18px; }
-    h1 { font-size: clamp(32px, 8vw, 56px); line-height: 0.95; margin: 0 0 12px; letter-spacing: -0.055em; }
-    .sub { color: #cbd5e1; font-size: 17px; line-height: 1.45; max-width: 680px; margin: 0; }
-    .toolbar { position: sticky; top: 0; z-index: 5; padding: 12px 0; backdrop-filter: blur(18px); background: rgba(11,16,32,0.78); }
-    input { width: 100%; border: 1px solid rgba(255,255,255,.16); border-radius: 18px; padding: 15px 16px; font-size: 17px; background: rgba(255,255,255,.08); color: #fff; outline: none; }
-    input::placeholder { color: #94a3b8; }
-    .grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); margin-top: 18px; }
-    .tile { min-height: 154px; display: flex; flex-direction: column; justify-content: space-between; padding: 16px; border-radius: 26px; background: linear-gradient(145deg, rgba(255,255,255,.14), rgba(255,255,255,.06)); border: 1px solid rgba(255,255,255,.15); color: inherit; text-decoration: none; box-shadow: 0 14px 35px rgba(0,0,0,.22); touch-action: manipulation; }
-    .tile:active { transform: scale(.985); }
-    .num { font-size: 36px; font-weight: 800; letter-spacing: -0.06em; }
-    .title { font-size: 15px; color: #e2e8f0; line-height: 1.25; margin-top: 8px; }
-    .launch { display: inline-flex; align-items: center; gap: 6px; color: #bfdbfe; font-weight: 700; font-size: 14px; }
-    .footer { margin-top: 26px; color: #94a3b8; font-size: 13px; line-height: 1.4; }
-    .pill { display: inline-block; margin-top: 14px; padding: 9px 12px; border-radius: 999px; background: rgba(255,255,255,.1); color: #dbeafe; font-size: 13px; }
+    :root { color-scheme: dark; font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:#0b1020; color:#f8fafc; }
+    * { box-sizing:border-box; } body { margin:0; min-height:100vh; background:radial-gradient(circle at top left,#1e3a8a,transparent 35%),#0b1020; }
+    .shell { max-width:1040px; margin:0 auto; padding:24px 16px 48px; } h1 { font-size:clamp(32px,8vw,56px); line-height:.95; margin:0 0 12px; letter-spacing:-.055em; }
+    .sub { color:#cbd5e1; font-size:17px; line-height:1.45; max-width:720px; margin:0; } .pill { display:inline-block; margin-top:14px; padding:9px 12px; border-radius:999px; background:rgba(255,255,255,.1); color:#dbeafe; font-size:13px; }
+    .toolbar { position:sticky; top:0; z-index:5; padding:12px 0; backdrop-filter:blur(18px); background:rgba(11,16,32,.78); }
+    input { width:100%; border:1px solid rgba(255,255,255,.16); border-radius:18px; padding:15px 16px; font-size:17px; background:rgba(255,255,255,.08); color:#fff; outline:none; }
+    .grid { display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(155px,1fr)); margin-top:18px; }
+    .tile { min-height:172px; display:flex; flex-direction:column; justify-content:space-between; padding:16px; border-radius:26px; background:linear-gradient(145deg,rgba(255,255,255,.14),rgba(255,255,255,.06)); border:1px solid rgba(255,255,255,.15); color:inherit; text-decoration:none; box-shadow:0 14px 35px rgba(0,0,0,.22); touch-action:manipulation; }
+    .tile:active { transform:scale(.985); } .num { font-size:34px; font-weight:800; letter-spacing:-.06em; } .title { font-size:15px; color:#e2e8f0; line-height:1.25; margin-top:8px; }
+    .path { color:#94a3b8; font-size:11px; line-height:1.25; margin-top:8px; word-break:break-word; } .launch { color:#bfdbfe; font-weight:800; font-size:14px; } .footer { margin-top:26px; color:#94a3b8; font-size:13px; line-height:1.4; }
   </style>
 </head>
 <body>
   <main class="shell">
     <section class="hero">
       <h1>Pro Angular<br/>Chapter Launcher</h1>
-      <p class="sub">Tap a tile from iPhone Safari. Each chapter opens in StackBlitz using the official Apress source repo, so there is no laptop or local npm install required.</p>
-      <span class="pill">iPhone friendly • Add to Home Screen</span>
+      <p class="sub">These tiles now target the real project subfolders in the Apress repo, such as <b>01 - Jumping Right In/todo</b> and <b>05 - SportsStore/SportsStore</b>, instead of fake /01 paths.</p>
+      <span class="pill">Tap tile → open runnable StackBlitz project</span>
     </section>
-    <div class="toolbar">
-      <input id="search" placeholder="Search chapters…" autocomplete="off" />
-    </div>
+    <div class="toolbar"><input id="search" placeholder="Search chapters…" autocomplete="off" /></div>
     <section id="grid" class="grid" aria-label="Chapter tiles"></section>
-    <p class="footer">Tip: in Safari, tap Share → Add to Home Screen. If a StackBlitz chapter asks to install dependencies, tap its install/run button inside StackBlitz.</p>
+    <p class="footer">Some book examples need StackBlitz to install dependencies first. If StackBlitz cannot run a specific old Angular project on iPhone, use the GitHub button inside StackBlitz to inspect the code.</p>
   </main>
   <script>
-    const chapters = Array.from({ length: 29 }, (_, i) => {
-      const n = String(i + 1).padStart(2, '0');
-      return {
-        n,
-        title: `Chapter ${n}`,
-        url: `https://stackblitz.com/github/Apress/pro-angular-5ed/tree/main/${n}`
-      };
-    });
+    const repo = 'https://stackblitz.com/github/Apress/pro-angular-5ed/tree/main/';
+    const chapters = [
+      ['01','Jumping Right In','01 - Jumping Right In/todo'],
+      ['03','Primer 1','03 - Primer 1/End of Chapter/Primer'],
+      ['04','Primer 2','04 - Primer 2/End of Chapter/Primer'],
+      ['05','SportsStore','05 - SportsStore/SportsStore'],
+      ['06','SportsStore 2','06 - SportsStore 2/End of Chapter/SportsStore'],
+      ['07','SportsStore 3','07 - SportsStore 3/End of Chapter/SportsStore'],
+      ['08','SportsStore 4','08 - SportsStore 4/End of Chapter/SportsStore'],
+      ['09','Angular Projects and Tools','09  - Angular Projects and Tools/example'],
+      ['10','Using Data Bindings','10  - Using Data Bindings/example'],
+      ['12','Using Events and Forms','12 - Using Events and Forms/End of Chapter/example'],
+      ['15','Creating Components','15 - Creating Components/End of Chapter/example'],
+      ['17','Using Services','17 - Using Services/End of Chapter/example'],
+      ['20','Creating the Example Project','20 - Creating the Example Project/exampleApp'],
+      ['21','Using the Forms API','21 - Using the Forms API/End of Chapter/exampleApp'],
+      ['23','HTTP Requests','23 - HTTP Requests/End of Chapter/exampleApp'],
+      ['24','URL Routing','24 - URL Routing/End of Chapter/exampleApp'],
+      ['25','URL Routing 2','25 - URL Routing 2/End of Chapter/exampleApp'],
+      ['26','URL Routing 3','26 - URL Routing 3/End of Chapter/exampleApp'],
+      ['27','Animations','27 - Animations/End of Chapter/exampleApp'],
+      ['28','Component Libraries','28 - Component Libraries/End of Chapter/exampleApp'],
+      ['29','Unit Testing','29 - Unit Testing/End of Chapter/exampleApp']
+    ].map(([n,title,path]) => ({ n, title, path, url: repo + path.split('/').map(encodeURIComponent).join('/') }));
 
     const grid = document.getElementById('grid');
     const search = document.getElementById('search');
-
     function render(filter = '') {
       const q = filter.trim().toLowerCase();
       grid.innerHTML = '';
-      chapters
-        .filter(c => !q || c.title.toLowerCase().includes(q) || c.n.includes(q))
-        .forEach(c => {
-          const a = document.createElement('a');
-          a.className = 'tile';
-          a.href = c.url;
-          a.target = '_blank';
-          a.rel = 'noopener noreferrer';
-          a.innerHTML = `<div><div class="num">${c.n}</div><div class="title">${c.title}</div></div><div class="launch">Launch ↗</div>`;
-          grid.appendChild(a);
-        });
+      chapters.filter(c => !q || `${c.n} ${c.title} ${c.path}`.toLowerCase().includes(q)).forEach(c => {
+        const a = document.createElement('a');
+        a.className = 'tile'; a.href = c.url; a.target = '_blank'; a.rel = 'noopener noreferrer';
+        a.innerHTML = `<div><div class="num">${c.n}</div><div class="title">${c.title}</div><div class="path">${c.path}</div></div><div class="launch">Launch in StackBlitz ↗</div>`;
+        grid.appendChild(a);
+      });
     }
-
-    search.addEventListener('input', e => render(e.target.value));
-    render();
-
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('./sw.js').catch(() => {});
-    }
+    search.addEventListener('input', e => render(e.target.value)); render();
+    if ('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js').catch(() => {});
   </script>
 </body>
 </html>
