@@ -1,0 +1,9 @@
+{
+  "name": "Pro Angular Launcher",
+  "short_name": "AngularChapters",
+  "display": "standalone",
+  "background_color": "#0b1020",
+  "theme_color": "#111827",
+  "start_url": "/",
+  "icons": []
+}
